@@ -5,7 +5,7 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Connect to your MongoDB with your existing database name
+
 mongoose.connect('mongodb://localhost:27017/project', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -21,20 +21,17 @@ db.once('open', () => {
   console.log('Connected to MongoDB');
 });
 
-// Define a schema for your existing "Research" collection
+//research
 const researchSchema = new mongoose.Schema({
   title: String,
-  // Add more fields if needed
 });
 
-// Create a model based on the existing "Research" collection
-// Create a model based on the existing "Research" collection
 const Research = mongoose.model('Research', researchSchema, 'Research');
+//end research
 
 //publications
 const publicationsSchema = new mongoose.Schema({
     title: String,
-    // Add more fields if needed
   });
 
 const publications = mongoose.model('selected publications', publicationsSchema, 'selected publications');
@@ -43,7 +40,6 @@ const publications = mongoose.model('selected publications', publicationsSchema,
 //projects
 const projectsSchema = new mongoose.Schema({
     title: String,
-    // Add more fields if needed
   });
 
   const projects = mongoose.model('funded projects', projectsSchema, 'funded projects');
@@ -63,7 +59,6 @@ const Faculty = mongoose.model('Faculty', facultySchema, 'faculty');
 //courses
 const coursesSchema = new mongoose.Schema({
   name: String,
-  // Add more fields if needed
 });
 
 const courses = mongoose.model('courses offered', coursesSchema, 'courses offered');
@@ -100,7 +95,7 @@ const Alumni = mongoose.model('Alumni', alumniSchema, 'alumni');
 
 app.use(express.static(__dirname));
 
-// Serve HTML files from the main folder
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
@@ -128,7 +123,7 @@ app.get('/publication.html', (req, res) => {
   app.get('/studentspage/studentindex.html', (req, res) => {
     res.sendFile(path.join(__dirname, 'studentspage', 'studentindex.html'));
   });
-// Add more routes for other HTML files if needed
+
 
 app.get('/api/research', async (req, res) => {
     try {
@@ -229,7 +224,7 @@ app.get('/api/alumni', async (req, res) => {
 });
 
 
-// Start the server
+
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
 });
