@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | CSG</title>
+    <link rel="icon" href="./favicon-32x32.png" type="image/x-icon">
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+
+    main {
+        display: flex;
+        flex-direction: column; 
+        align-items: center; 
+        padding: 20px;
+    }
+
+    .project-container {
+        display: flex;
+        width: 100%;
+        overflow: hidden; 
+        box-sizing: border-box; 
+        animation: slideAnimation 15s linear infinite; 
+    }
+
+    .project-item {
+        width: 50%; 
+        margin: 10px;
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease; 
+        background-color: #fff;
+        box-sizing: border-box;
+        font-size: 13px;
+    }
+
+    .project-item:hover {
+        transform: scale(1.02); 
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+    }
+
+    .project-item h2 {
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .project-item p {
+        color: #666;
+    }
+
+    .project_image {
+        display: block;
+        margin: 0 auto; /* Center the image horizontally */
+        max-width: 100%; /* Set maximum width */
+        height: auto; /* Maintain aspect ratio */
+        width: 80%; /* Adjust the width as needed */
+        max-height: 40vh; /* Set maximum height */
+        padding-top: 20px;
+    }
+
+    @keyframes slideAnimation {
+        0% {
+            transform: translateX(50%);
+        }
+
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+</style>
+
+<body>
+    <div class="header-content">
+        <img src="./logo.png" alt="Left Logo" class="left-logo">
+        <h1>Computer Systems Group</h1>
+        <img src="./IIIT_logo.png" alt="Right Logo" class="right-logo">
+    </div> <br>
+    <nav class="navbar">
+        <a href="./index.html">HOME</a>
+        <a href="./Facultypage/Facultyinfo.html">FACULTY</a>
+        <a href="./students page/studentindex.html">STUDENTS</a>
+        <a href="./project.html">PROJECT</a>
+        
+        <a href="./publication.html">PUBLICATIONS</a>
+        <a href="./researchworks.html">RESEARCH WORKS</a>
+        <a href="./coursesoffered.html">COURSES OFFERED</a>
+        <a href="./event.html">EVENTS</a>
+    </nav>
+    
+    <img src="./project_page_image.jpg" alt="Project Image " class="project_image">
+
+    <h1 style="font-size: 50px; padding-top: 20px;"> CSG Projects</h1>
+    <main>
+        <div class="project-container" id="project-container">
+            
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            try {
+                
+                const response = await fetch('/api/projects');
+                const projectsData = await response.json();
+
+               
+                const projectContainer = document.getElementById('project-container');
+
+                
+                projectsData.forEach(project => {
+                    const projectItem = document.createElement('div');
+                    projectItem.classList.add('project-item');
+
+                    const title = document.createElement('h2');
+                    title.textContent = project.title;
+
+
+                    projectItem.appendChild(title);
+
+                    projectContainer.appendChild(projectItem);
+                });
+            } catch (error) {
+                console.error(error);
+            }
+        });
+    </script>
+
+</body>
+<footer>
+    <div class="circle">&copy;</div>
+    <div class="footer-text">2018 Computer Systems Group (CSG), IIIT-Hyderabad</div>
+    
+</footer>
+
+</html>
